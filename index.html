@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Земля — живая 3D-планета</title>
+    <meta
+      name="description"
+      content="Реалистичная 3D-Земля с освещением в реальном времени: огни городов, облака, атмосфера и таймлапс суток."
+    />
+    <meta name="theme-color" content="#010309" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <canvas id="globe" aria-hidden="true"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <div class="loader" role="status" aria-live="polite">
+      <div class="loader__orb"></div>
+      <p id="loader-text">Загружаем планету <span id="loader-value">0%</span></p>
+    </div>
+
+    <header class="topbar">
+      <a class="brand" href="#top"><span class="brand__orb" aria-hidden="true"></span>Terra</a>
+      <nav class="nav" aria-label="Разделы">
+        <a href="#planet">Планета</a>
+        <a href="#atmosphere">Атмосфера</a>
+        <a href="#night">Ночь</a>
+        <a href="#home">Наш дом</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="top" class="section hero" data-scene>
+        <div class="hero__content">
+          <p class="eyebrow intro"><span class="live-dot"></span>Освещение в реальном времени</p>
+          <h1 class="hero__title intro" style="--d: 0.1s">Земля</h1>
+          <p class="hero__lead intro" style="--d: 0.25s">
+            Третья планета от Солнца и единственное известное место во Вселенной, где есть жизнь. День,
+            ночь и огни городов на этом глобусе — ровно такие, как прямо сейчас.
+          </p>
+          <div class="hero__actions intro" style="--d: 0.4s">
+            <a class="btn btn--primary" href="#planet">Исследовать</a>
+            <button class="btn btn--ghost" type="button" data-action="timelapse" aria-pressed="false">
+              <span class="btn__icon" aria-hidden="true"></span>
+              <span class="btn__label">Сутки за 24 секунды</span>
+            </button>
+          </div>
+        </div>
+
+        <aside class="telemetry glass intro" style="--d: 0.6s" aria-label="Положение Солнца">
+          <div class="telemetry__mode">
+            <span class="live-dot"></span><span id="mode-label">Реальное время</span>
+          </div>
+          <div class="telemetry__item">
+            <span class="label">Время UTC</span><span id="clock-time" class="value value--mono">--:--:--</span>
+          </div>
+          <div class="telemetry__item">
+            <span class="label">Дата</span><span id="clock-date" class="value">—</span>
+          </div>
+          <div class="telemetry__item">
+            <span class="label">Солнце в зените</span><span id="subsolar" class="value">—</span>
+          </div>
+        </aside>
+
+        <div class="hints intro" style="--d: 0.8s" aria-hidden="true">
+          <span class="hints__drag">Потяните, чтобы вращать</span>
+          <span class="hints__scroll">Листайте<i></i></span>
+        </div>
+      </section>
+
+      <section id="planet" class="section section--right" data-scene>
+        <article class="panel glass reveal">
+          <p class="eyebrow">01 — Планета</p>
+          <h2>Голубая точка</h2>
+          <p>
+            Земля — самая плотная планета Солнечной системы и крупнейшая из планет земной группы. Почти
+            три четверти её поверхности покрыто океаном, а магнитное поле и атмосфера защищают жизнь от
+            космического излучения.
+          </p>
+          <dl class="stats">
+            <div class="stat"><dt>Средний радиус</dt><dd>6 371 <small>км</small></dd></div>
+            <div class="stat"><dt>Масса</dt><dd>5,97×10<sup>24</sup> <small>кг</small></dd></div>
+            <div class="stat"><dt>Возраст</dt><dd>4,54 <small>млрд лет</small></dd></div>
+            <div class="stat"><dt>Покрыто водой</dt><dd>71 <small>%</small></dd></div>
+            <div class="stat"><dt>Скорость по орбите</dt><dd>29,8 <small>км/с</small></dd></div>
+            <div class="stat"><dt>Наклон оси</dt><dd>23,44<small>°</small></dd></div>
+          </dl>
+        </article>
+      </section>
+
+      <section id="atmosphere" class="section section--left" data-scene>
+        <article class="panel glass reveal">
+          <p class="eyebrow">02 — Атмосфера</p>
+          <h2>Тонкая голубая линия</h2>
+          <p>
+            Атмосфера — это тонкая плёнка: 90&nbsp;% массы воздуха сосредоточено в слое толщиной всего
+            16&nbsp;км, это четверть процента радиуса планеты.
+          </p>
+          <p>
+            Голубое небо и сияющий ореол вокруг Земли — результат рэлеевского рассеяния: короткие синие
+            волны солнечного света рассеиваются воздухом сильнее красных. На границе дня и ночи свет идёт
+            через толщу атмосферы дольше — и край планеты загорается оранжевым.
+          </p>
+          <div class="composition">
+            <div class="composition__bar" aria-hidden="true">
+              <span class="n2" style="flex: 78.08"></span>
+              <span class="o2" style="flex: 20.95"></span>
+              <span class="other" style="flex: 0.97"></span>
+            </div>
+            <ul class="composition__legend">
+              <li><i class="n2"></i>Азот 78&nbsp;%</li>
+              <li><i class="o2"></i>Кислород 21&nbsp;%</li>
+              <li><i class="other"></i>Аргон и другие ≈1&nbsp;%</li>
+            </ul>
+          </div>
+          <dl class="stats stats--compact">
+            <div class="stat"><dt>Граница космоса</dt><dd>100 <small>км</small></dd></div>
+            <div class="stat"><dt>Озоновый слой</dt><dd>15–35 <small>км</small></dd></div>
+          </dl>
+        </article>
+      </section>
+
+      <section id="night" class="section section--right" data-scene>
+        <article class="panel panel--warm glass reveal">
+          <p class="eyebrow eyebrow--warm">03 — Ночная сторона</p>
+          <h2>Огни, видимые из&nbsp;космоса</h2>
+          <p>
+            В любой момент ночь накрывает половину планеты. Свет городов складывается в карту
+            цивилизации: побережья, долины рек, дороги и мегаполисы.
+          </p>
+          <p>
+            Граница дня и ночи — терминатор — бежит по экватору со скоростью около 1&nbsp;670&nbsp;км/ч.
+            Ускорьте время и посмотрите, как она обходит планету.
+          </p>
+          <button class="btn btn--warm" type="button" data-action="timelapse" aria-pressed="false">
+            <span class="btn__icon" aria-hidden="true"></span>
+            <span class="btn__label">Запустить таймлапс</span>
+          </button>
+        </article>
+      </section>
+
+      <section id="home" class="section section--center" data-scene>
+        <div class="finale reveal">
+          <h2>Другого дома у&nbsp;нас нет</h2>
+          <blockquote>
+            «Посмотрите ещё раз на эту точку. Это здесь. Это дом. Это мы».
+            <cite>Карл Саган, «Бледно-голубая точка»</cite>
+          </blockquote>
+          <a class="btn btn--primary" href="#top">Наверх</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>
+        Текстуры Земли —
+        <a href="https://www.solarsystemscope.com/textures/" target="_blank" rel="noopener">Solar System Scope</a>
+        (CC BY 4.0) на основе данных NASA. Положение Солнца рассчитывается по формулам астрономического
+        альманаха.
+      </p>
+      <p>Terra · three.js</p>
+    </footer>
+
+    <noscript><p class="noscript">Для 3D-планеты нужен JavaScript.</p></noscript>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
